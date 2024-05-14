@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMI Calculation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <style>
+        ::placeholder{
+            text-align: right;
+        }
+        .progress-bar{
+            font-size: 15px;
+            font-weight: 500;
+        }
+    </style>
+    <script>
+           function Calculate(){
+            var weight = parseInt(document.getElementById("weight").value);
+            var height = parseInt(document.getElementById("height").value)
+
+            var  age= parseInt(document.getElementById("agetxt").value)
+
+            var BMI = weight/(height/100*height/100);
+            var print=document.querySelector("p");
+
+                    if(weight>=(5) && weight<=(53)){
+                        print.innerHTML=`<h1>${(BMI.toFixed(2))}</h1><b>Under Weight BMI</b>`
+                    }else if(weight>=(54) && weight<=(72)){
+                       print.innerHTML=`<h1>${(BMI.toFixed(2))}</h1><b>Normal BMI</b>`
+                    }else if(weight>=(73) && weight<=(86)){
+                        print.innerHTML=`<h1>${(BMI.toFixed(2))}</h1><b>Over Weight BMI</b>`
+                    }else if(weight>=87){
+                        print.innerHTML=`<h1>${(BMI.toFixed(2))}</h1><b>Obese BMI</b>`
+                    }
+
+
+                    //result hide/show
+                    var result= document.getElementById("result");
+                    if(isNaN(BMI)){
+                       result.style.display="none"
+                    }else {
+                       result.style.display="block"
+                    }
+
+                    //pointer margin
+                    pointerMargin=(BMI/40)*100;
+                    var pointer=document.getElementById("pointer");
+                    pointer.style.marginLeft=pointerMargin+"%"
+         }
+            
+    </script>
+</head>
+<body class="container-fluid">
+      <div class="p-5 border border-1 mt-2 border-dark">
+        <h4 class="mb-5">BMI Calculator :-</h3>
+        <div class="row">
+            <div class="col">
+                <label for=""class="form-label">Age</label>
+               <input type="text"id="agetxt"class="form-control"placeholder="Age">
+            </div>
+            <div class="col">
+                <label for=""class="form-label">Weight</label>
+               <input type="text"id="weight"class="form-control"placeholder="KG">
+            </div>
+            <div class="col">
+                <label for=""class="form-label">Height</label>
+               <input type="text"id="height"class="form-control"placeholder="CM">
+            </div>
+        </div>
+        <div class="mt-5 text-center">
+            <button class="btn btn-primary"onclick="Calculate()">Calculate</button>
+        </div>
+      </div>
+      <div id="result"style="display:none">
+        <p class=" mb-5">Body Mass Col</p>
+        <div>
+            <div class="progress mt-4">
+                <div class="progress-bar w-25 bg-black"id="underweight">Below 53kg</div>
+                <div class="progress-bar w-25 bg-info"id="normalweight">53-72kg</div>
+                <div class="progress-bar w-25 bg-warning"id="overweight">73-86kg</div>
+                <div class="progress-bar w-25 bg-danger"id="obese">Above 86kg</div>
+            </div>
+            <div>
+                <span class="bi bi-triangle-fill"id="pointer"></span>
+            </div>
+        </div>
+    </div>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
